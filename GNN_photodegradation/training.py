@@ -89,7 +89,7 @@ def main():
     # Define loss and optimizer
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=0.0001)
-    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=10, verbose=True)
+    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=10)
     logger.info("Loss function and optimizer defined.")
     # Training loop
     PATIENCE = 50
@@ -201,3 +201,6 @@ def main():
     # 3D UMAP plot
     plot_umap(combined_exp_feats, combined_graph_feats, combined_targets.flatten(), "Combined", title='3D UMAP Plot', dimensions=3)
     logger.info("All plots have been generated and saved.")
+    
+torch.save(model.state_dict(), "best_model.pth")
+print("✅ best_model.pth saved!")
